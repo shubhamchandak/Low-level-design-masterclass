@@ -16,8 +16,8 @@ class FirstAvailableSeatsStrategy(SeatAssignmentStrategy):
             if seat_type in required_seat_types and not seat.is_booked() \
               and len(final_seats[seat_type]) < required_seat_types[seat_type]:
                 final_seats[seat_type].append(seat)
-        
+
         for seat_type, count in required_seat_types.items():
-            if len(final_seats.get(seat_type, [])) != count:
+            if len(final_seats.get(seat_type)) != count:
                 return []
-        return [seat for seats in final_seats.values() for seat in seats]
+        return sum(final_seats.values(), [])
